@@ -349,10 +349,11 @@ void StartTask1(void *argument)
           HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4|GPIO_PIN_5, GPIO_PIN_RESET);
           // Red on
           HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, GPIO_PIN_SET);
+
           osDelay(1000);
-          HAL_GPIP_WritePin(GPIOB, GPIO_PIN_10, GPIO_PIN_SET);
+          HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10, GPIO_PIN_SET);
           osDelay(10000);
-          HAL_GPIP_WritePin(GPIOB, GPIO_PIN_10, GPIO_PIN_RESET);
+          HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10, GPIO_PIN_RESET);
           osDelay(1000);
 
           state = 1;
