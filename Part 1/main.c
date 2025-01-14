@@ -335,13 +335,16 @@ static void MX_GPIO_Init(void)
 /* USER CODE END Header_StartTask1 */
 void StartTask1(void *argument)
 {
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5, GPIO_PIN_RESET);
   /* USER CODE BEGIN 5 */
   /* Infinite loop */
   for(;;)
   {
+
 	  HAL_UART_Transmit(&huart2, dataTask1, sizeof(dataTask1), 1000);
+	  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5, GPIO_PIN_RESET);
 	  // HAL_GPIO_TogglePin(GPIOB,GPIO_PIN_4);//Green LED
+
+      osDelay(1000);
 
       switch (state) {
         case 0:
