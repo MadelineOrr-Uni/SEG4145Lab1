@@ -104,7 +104,7 @@ uint8_t dataTask3[] = "Task3: It is nice you see here, Task3\r\n";
 
 
 short pedFlag = 0;
-short state = 0;
+short state = 2;
 
 /* USER CODE END 0 */
 
@@ -349,7 +349,12 @@ void StartTask1(void *argument)
           HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4|GPIO_PIN_5, GPIO_PIN_RESET);
           // Red on
           HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, GPIO_PIN_SET);
+          osDelay(1000);
+          HAL_GPIP_WritePin(GPIOB, GPIO_PIN_10, GPIO_PIN_SET);
           osDelay(10000);
+          HAL_GPIP_WritePin(GPIOB, GPIO_PIN_10, GPIO_PIN_RESET);
+          osDelay(1000);
+
           state = 1;
           break;
         case 1:
@@ -365,8 +370,14 @@ void StartTask1(void *argument)
 			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3|GPIO_PIN_5, GPIO_PIN_RESET);
 			// Green on
 			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_SET);
-			osDelay(10000);
-			state = 3;
+
+			if (pedFlag) {
+				state = 3;
+			}
+
+			osDelay(500);
+
+
 		  break;
         case 3:
         	// Red and Green off
@@ -437,11 +448,12 @@ void StartTask4(void *argument)
   for(;;)
   {
 	  uint8_t dataTask4[] = "Task 5: I toggle GPIOB pin 10.\r\n";
+
 	  if(pedFlag)
 	  {
-	     HAL_GPIO_TogglePin(GPIOB,GPIO_PIN_10);
-	 	 pedFlag = 0;
-	     HAL_UART_Transmit(&huart2, dataTask4, sizeof(dataTask4), 1000);
+//	     HAL_GPIO_TogglePin(GPIOB,GPIO_PIN_10);
+	 	 pedFlag = 1;
+//	     HAL_UART_Transmit(&huart2, dataTask4, sizeof(dataTask4), 1000);
 	 	}
 	 	osDelay(100);
   }
