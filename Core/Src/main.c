@@ -352,8 +352,10 @@ void StartTask1(void *argument)
 
           osDelay(1000);
           HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10, GPIO_PIN_SET);
+          HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_RESET);
           osDelay(10000);
           HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10, GPIO_PIN_RESET);
+          HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_SET);
           osDelay(1000);
 
           state = 1;
@@ -368,9 +370,10 @@ void StartTask1(void *argument)
           break;
         case 2:
         	// Red and Yellow off
-			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3|GPIO_PIN_5, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3|GPIO_PIN_5|GPIO_PIN_10, GPIO_PIN_RESET);
 			// Green on
 			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_SET)
 
 			if (pedFlag) {
 				state = 3;
