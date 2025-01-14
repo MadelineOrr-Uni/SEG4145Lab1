@@ -357,7 +357,7 @@ void StartTask1(void *argument)
           HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10, GPIO_PIN_RESET);
           HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_SET);
           osDelay(1000);
-
+          pedFlag =0;
           state = 1;
           break;
         case 1:
@@ -378,7 +378,6 @@ void StartTask1(void *argument)
 			if (pedFlag) {
 				state = 3;
 			}
-
 			osDelay(500);
 
 
